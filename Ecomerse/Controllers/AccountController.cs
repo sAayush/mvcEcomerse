@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Ecomerse.Models;
+using System.Threading.Tasks;
 
 namespace Ecomerse.Controllers
 {
@@ -63,6 +64,13 @@ namespace Ecomerse.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

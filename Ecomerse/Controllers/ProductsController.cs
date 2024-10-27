@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization; // Add this namespace
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Ecomerse.Data;
@@ -35,6 +36,7 @@ namespace Ecomerse.Controllers
         }
 
         // GET: Products/Create
+        [Authorize] // Restrict access to authenticated users
         public IActionResult Create()
         {
             return View();
@@ -43,6 +45,7 @@ namespace Ecomerse.Controllers
         // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize] // Restrict access to authenticated users
         public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Quantity,Category,InCart")] Product product)
         {
             if (ModelState.IsValid)
