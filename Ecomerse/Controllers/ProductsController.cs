@@ -33,7 +33,7 @@ namespace Ecomerse.Controllers
             if (product == null) return NotFound();
 
             return View(product);
-        }
+        }                     
 
         // GET: Products/Create
         [Authorize] // Restrict access to authenticated users
@@ -46,7 +46,7 @@ namespace Ecomerse.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize] // Restrict access to authenticated users
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Quantity,Category,InCart")] Product product)
+        public async Task<IActionResult> Create([Bind("Id, Name, Price, Description, Category")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace Ecomerse.Controllers
         // POST: Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,Quantity,Category,InCart")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Name, Price, Description, Category")] Product product)
         {
             if (id != product.Id) return NotFound();
 
